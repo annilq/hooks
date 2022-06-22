@@ -10,6 +10,7 @@ export default {
   output: {
     fileName: "index.js",
     dir: 'dist',
+    format: 'cjs'
   },
   plugins: [
     commonjs({
