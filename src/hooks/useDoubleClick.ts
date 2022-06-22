@@ -4,12 +4,17 @@ import {
 } from 'react';
 
 const useDoubleClick = (
-  doubleClick = (e, record) => { },
-  click = (e, record) => { },
+  doubleClick = (e, record) => {
+    console.log(e, record);
+
+  },
+  click = (e, record) => {
+    console.log(e, record);
+  },
   options = {
     timeout: 200,
   }) => {
-  const clickTimeout = useRef();
+  const clickTimeout = useRef(null);
 
   const clearClickTimeout = () => {
     if (clickTimeout) {

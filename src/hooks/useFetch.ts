@@ -7,6 +7,7 @@ interface FetchItem {
   id: number
   cb: (data: any) => void
 }
+type YQResponse<T> = any
 
 const fetchCache: Record<string, FetchItem[]> = {
 };
@@ -46,7 +47,7 @@ function useFetch<T = unknown>(
     status: 'init',
     error: undefined,
     data: initValues,
-    run: () => { }
+    run: () => Promise.resolve({})
   };
 
   // Keep state logic separated
@@ -79,7 +80,7 @@ function useFetch<T = unknown>(
       } else {
         dispatch({ type: 'failure', payload: response?.info });
       }
-    } catch (error: Error) {
+    } catch (error) {
       if (cancelRequest) return;
       dispatch({ type: 'failure', payload: error.message });
     }

@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
-import type { PaginationProps, TableProps } from 'antd';
 
-import useFetch from '@/hooks/useFetch';
+import useFetch from './useFetch';
 
-interface State<T> extends TableProps<T> {
-  setParams: (params: PaginationProps) => void
+interface State<T> {
+  setParams: (params: any) => void
   params: any
   reloadAndRest: () => void
-  tableProps: TableProps<T>
+  tableProps: any
 }
 
 interface Options<T> {
@@ -17,7 +16,8 @@ interface Options<T> {
 }
 
 const initialPagination = {
-  currentPage: 1
+  currentPage: 1,
+  pageSize: 10
 }
 
 function useTableData<T = unknown>(
@@ -28,11 +28,11 @@ function useTableData<T = unknown>(
 
   const [params, setParams] = useState(initParams);
   const [paginationparams, setpagination] = useState(initialPagination);
-  const cacheData = useRef<{ list: T[], pagination: PaginationProps }>()
+  const cacheData = useRef<{ list: T[], pagination: any }>()
   const { data = {}, run, status, } = useFetch(fetcher, {}, { manual: true, ...options });
-  const { list, currentPage, pageSize, totalSize } = data as ListData<T>
+  const { list, currentPage, pageSize, totalSize } = data as any
 
-  const pagination: PaginationProps = {
+  const pagination = {
     current: currentPage,
     total: totalSize,
     pageSize
@@ -66,12 +66,12 @@ function useTableData<T = unknown>(
     }, [paginationparams]
   )
 
-  const tableProps: TableProps<T> = {
+  const tableProps = {
     pagination: pagination.current ? pagination : cacheData.current?.pagination,
     dataSource: list,
     // dataSource: status === "fetched" ? list : list || cacheData.current?.list,
     loading: status === "fetching",
-    onChange: (pagination: PaginationProps, filters: any, sorter: any, extra: any) => {
+    onChange: (pagination: any, filters: any, sorter: any, extra: any) => {
       setpagination({ currentPage: pagination.current, pageSize: pagination.pageSize })
     },
     request: () => run({ ...params, ...paginationparams })
