@@ -1,5 +1,5 @@
 {
-  "name": "ra-hooks",
+  "name": "rua-hooks",
   "version": "1.0.0",
   "description": "react hooks",
   "author": "annilq",
@@ -15,10 +15,8 @@
   },
   "keywords": [],
   "devDependencies": {
-    "@open-wc/building-rollup": "^2.0.1",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
-    "deepmerge": "^4.2.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.75.7",
     "rollup-plugin-commonjs": "^10.1.0",
