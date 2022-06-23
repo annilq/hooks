@@ -7,12 +7,11 @@ interface FetchItem {
   id: number
   cb: (data: any) => void
 }
-type YQResponse<T> = any
 
 const fetchCache: Record<string, FetchItem[]> = {
 };
 
-type fetcher<T> = (params: any) => Promise<YQResponse<T>> | false
+type fetcher<T> = (params: any) => Promise<T> | false |any
 interface State<T> {
   status: 'init' | 'fetching' | 'error' | 'fetched';
   data?: T;

@@ -9,6 +9,7 @@
       "es2018",
       "dom"
     ],
+    "declaration": true,
     "strict": false,
     "esModuleInterop": false,
     "outDir": "out-tsc",
